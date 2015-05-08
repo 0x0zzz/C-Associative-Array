@@ -2,7 +2,7 @@
 
 ### Associative Array Library in C
 
-Associative Array implementation in pure C.  Store and retrieve any type of data, from integers, to structs, to function pointers, to a key consisting of a char*.  Useful in the implementation of 
+Associative Array implementation in pure C.  Store and retrieve any type of data, from integers, to structs, to function pointers, to a key consisting of a char*.
 
 ### Basic Usage
 
