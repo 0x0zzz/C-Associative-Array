@@ -65,10 +65,11 @@ Removing a key from an Associative Array:
 
 /*
   Usage:
-  void* AssocArray_RemoveKey(AssocArray *array, char *key);
+  void AssocArray_RemoveKey(AssocArray *array, char *key);
 */
 
 AssocArray_RemoveKey(array, "test");
+
 ```
 
 Destroying an Associative Array:
