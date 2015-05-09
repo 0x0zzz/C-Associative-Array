@@ -24,7 +24,7 @@ Setting a key of an Associative Array:
 
 /*
   Usage:
-  void AssocArray_SetKey(AssocArray *array, char *key, (void*) value);
+  void AssocArray_SetKey(AssocArray *array, char *key, void* value);
 */
 
 int number;
