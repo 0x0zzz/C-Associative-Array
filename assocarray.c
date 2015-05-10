@@ -184,8 +184,6 @@ void AssocArray_ForEachKey(AssocArray *array, void (*callback)(char*)) {
 	}
 }
 
-
-
 // create a new assoc array
 AssocArray* AssocArray_New() {
 	AssocArray *array;
