@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include "assocarray.h"
 
-void main() {
+void key_handler(char *key) {
+	printf("key: \"%s\"\n", key);
+}
+
+int main(int argc, char **argv) {
 	// create new associative array
 	AssocArray *array;
 	array = AssocArray_New();
@@ -32,6 +36,11 @@ void main() {
 	string = AssocArray_GetKey(array, "string");
 	printf("string: %s\n", string);
 
+	// iterate
+	AssocArray_ForEachKey(array, &key_handler);
+
 	// destroy the array
 	AssocArray_Destroy(array);
+
+	return 0;
 }

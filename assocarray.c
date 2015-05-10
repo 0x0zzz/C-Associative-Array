@@ -12,6 +12,12 @@ void AssocArrayNode_SetKey(AssocArrayNode *node, char *key) {
 	node->key = key;
 }
 
+// get a key from a node
+char* AssocArrayNode_GetKey(AssocArrayNode *node) {
+	return  node->key;
+}
+
+
 // set the value of a node
 void AssocArrayNode_SetValue(AssocArrayNode *node, void *value) {
 	node->value = value;
@@ -167,6 +173,18 @@ void AssocArray_FlushKeys(AssocArray *array) {
 	array->node_count = 0;
 	array->nodes = (AssocArrayNode**) realloc(array->nodes, array->node_count);
 }
+
+// iterator for each key in the array, with a callback handler
+void AssocArray_ForEachKey(AssocArray *array, void (*callback)(char*)) {
+	int i;
+	for (i = 0; i < array->node_count; i++) {
+		char *key;
+		key = AssocArrayNode_GetKey(array->nodes[i]);
+		callback(key);
+	}
+}
+
+
 
 // create a new assoc array
 AssocArray* AssocArray_New() {

@@ -12,12 +12,15 @@ typedef struct {
 } AssocArray;
 
 // public functions
+int AssocArray_GetKeyCount(AssocArray *array);
 int AssocArray_HasKey(AssocArray *array, char *key);
 void AssocArray_AddKey(AssocArray *array, char *key);
 void AssocArray_SetKey(AssocArray *array, char *key, void *value);
 void* AssocArray_GetKey(AssocArray *array, char *key);
 void AssocArray_RemoveKey(AssocArray *array, char *key);
 void AssocArray_FlushKeys(AssocArray *array);
+
+void AssocArray_ForEachKey(AssocArray *array, void (*callback)(char*));
 
 // constructor, destructor for associateive array
 AssocArray* AssocArray_New();
