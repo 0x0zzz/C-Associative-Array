@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "assocarray.h"
 
-void key_handler(char *key) {
+void key_value_handler(char *key, void *value) {
 	printf("key: \"%s\"\n", key);
 }
 
@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 	printf("string: %s\n", string);
 
 	// iterate
-	AssocArray_ForEachKey(array, &key_handler);
+	AssocArray_ForEach(array, &key_value_handler);
 
 	// destroy the array
 	AssocArray_Destroy(array);

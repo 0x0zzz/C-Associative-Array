@@ -175,12 +175,21 @@ void AssocArray_FlushKeys(AssocArray *array) {
 }
 
 // iterator for each key in the array, with a callback handler
-void AssocArray_ForEachKey(AssocArray *array, void (*callback)(char*)) {
+void AssocArray_ForEach(AssocArray *array, void (*callback)(char*, void*)) {
 	int i;
 	for (i = 0; i < array->node_count; i++) {
+		// get the node instance
+		AssocArrayNode *node;
+		node = array->nodes[i];
+		
+		// load up the key and value for the callback handler
 		char *key;
-		key = AssocArrayNode_GetKey(array->nodes[i]);
-		callback(key);
+		void *value;
+		key = node->key;
+		value = node->value;
+
+		// fire callback handler
+		callback(key, value);
 	}
 }
 

@@ -19,7 +19,7 @@ void AssocArray_SetKey(AssocArray *array, char *key, void *value);
 void* AssocArray_GetKey(AssocArray *array, char *key);
 void AssocArray_RemoveKey(AssocArray *array, char *key);
 void AssocArray_FlushKeys(AssocArray *array);
-void AssocArray_ForEachKey(AssocArray *array, void (*callback)(char*));
+void AssocArray_ForEach(AssocArray *array, void (*callback)(char*, void*));
 
 // constructor, destructor for associateive array
 AssocArray* AssocArray_New();
