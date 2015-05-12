@@ -84,5 +84,16 @@ AssocArray_Destroy(array);
 
 ```
 
-
 More usage examples are located in "main.c" in the repository.
+
+### Building on Linux
+```
+
+git clone https://github.com/zkobman/C-Associative-Array.git
+cd C-Associative-Array
+gcc -shared -o libassocarray.so -fPIC assocarray.c
+mv libassocarray.so /path/to/lib
+mv assocarray.h /path/to/include
+export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
+
+```
