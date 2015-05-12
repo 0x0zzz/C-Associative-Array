@@ -5,6 +5,7 @@
 typedef struct AssocArrayNode {
 	char *key;
 	void *value;
+	void (*destroy_function)(void*);
 } AssocArrayNode;
 
 // set the key to a node
@@ -47,11 +48,18 @@ AssocArrayNode* AssocArrayNode_New(char *key, void *value) {
 	node = (AssocArrayNode*) malloc(sizeof(AssocArrayNode));
 	AssocArrayNode_SetKey(node, key);
 	AssocArrayNode_SetValue(node, value);
+
+	// initialize custom destroy function to NULL
+	node->destroy_function = NULL;
 	return node;
 }
 
 // free a node instance
 void AssocArrayNode_Destroy(AssocArrayNode *node) {
+	// if this node has a custom destroy function set, fire it off.
+	if (node->destroy_function != NULL) {
+		node->destroy_function(node->value);
+	}
 	free(node);
 }
 
@@ -174,6 +182,16 @@ void AssocArray_FlushKeys(AssocArray *array) {
 	array->nodes = (AssocArrayNode**) realloc(array->nodes, array->node_count);
 }
 
+// set a custom destroy function for a key's value - useful for when storing structs
+void AssocArray_SetKeyDestroyFunction(AssocArray *array, char *key, void (*destroy_function)(void*)) {
+	// run operation if the array has the node
+	AssocArrayNode *node;
+	node = AssocArray_GetNodeByKey(array, key);
+	if (node != NULL) {
+		node->destroy_function = destroy_function;
+	}
+}
+
 // iterator for each key in the array, with a callback handler
 void AssocArray_ForEach(AssocArray *array, void (*callback)(char*, void*)) {
 	int i;
@@ -181,7 +199,7 @@ void AssocArray_ForEach(AssocArray *array, void (*callback)(char*, void*)) {
 		// get the node instance
 		AssocArrayNode *node;
 		node = array->nodes[i];
-		
+
 		// load up the key and value for the callback handler
 		char *key;
 		void *value;
